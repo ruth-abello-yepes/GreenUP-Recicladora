@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GreenUp - Dueño de recicladora</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+
+<body>
+    <!--barra de navegación-->
+    <nav class="navbar bg-body-tertiary px-4 py-3 border-bottom">
+        <div class="container-fluid">
+
+            <a class="navbar-brand fw-bold mb-0" href="#">
+                <span class="text-success">Green</span><span class="text-primary">Up</span>
+            </a>
+
+            <form class="d-flex ms-3 me-auto w-25" role="search">
+                <div class="input-group">
+                    <span class="input-group-text bg-white">
+                        <i class="bi bi-search"></i>
+                    </span>
+                    <input class="form-control border-start-0" type="search"
+                        placeholder="Buscar puntos de reciclaje...">
+                </div>
+            </form>
+            <div class="d-flex align-items-center gap-4">
+                <i class="bi bi-bell fs-5"></i>
+                <i class="bi bi-gear"></i>
+                <i class="bi bi-person-circle"></i>
+            </div>
+    </nav>
+    <!-- contenido principal-->
+    <div class="container-fluid">
+        <div class="row">
+
+            <!-- barra lateral -->
+            <aside class="col-2 min-vh-100 border-end bg-body-tertiary p-3">
+                <!-- menú lateral -->
+                <div class="d-flex flex-column h-100">
+
+                    <div class="mb-4">
+                        <small class="text-muted">Centro de Reciclaje</small>
+                    </div>
+
+                    <nav class="nav flex-column gap-2">
+                        <a href="index.html" class="nav-link text-dark">
+                            <i class="bi bi-house-door me-2"></i>Inicio
+                        </a>
+
+                        <a href="materiales.html" class="nav-link text-dark">
+                            <i class="bi bi-recycle me-2"></i>Materiales
+                        </a>
+
+                        <a href="registros.html"
+                            class="nav-link active bg-white border rounded text-success fw-semibold">
+                            <i class="bi bi-journal-text me-2"></i>Registros
+                        </a>
+                        <!--Boton agregar material-->
+                        <div class="mt-auto">
+                            <div class="d-grid mb-3">
+                                <button class="btn btn-success" data-bs-toggle="modal"
+                                    data-bs-target="#modalAgregarMaterial">
+                                    <i class="bi bi-plus-lg me-2"></i>Agregar Material
+                                </button>
+                            </div>
+                            <div class="nav flex-column gap-1">
+                                <a href="#" class="nav-link text-muted small">
+                                    <i class="bi bi-question-circle me-2"></i>Centro de Ayuda
+                                </a>
+
+                                <a href="#" class="nav-link text-danger small">
+                                    <i class="bi bi-box-arrow-right me-2"></i>Cerrar Sesión
+                                </a>
+                            </div>
+                        </div>
+
+                </div>
+            </aside>
+
+            <!-- contenido principal -->
+            <main class="col-10 p-4">
+                <div class="row align-items-center mb-4">
+                    <div class="col-md-8">
+                        <h2 class="fw-bold">Historial de Registros</h2>
+                        <p class="text-muted mb-0">
+                            Un registro cronológico de todos los flujos de reciclaje ecológico y las transacciones de la
+                            instalación.
+                        </p>
+                    </div>
+
+                    <!-- DERECHA -->
+                    <div class="col-md-4">
+                        <div class="card border-0 rounded-4 p-3 shadow-sm">
+                            <div class="d-flex align-items-center gap-3">
+
+                                <div class="bg-success-subtle rounded-circle p-3">
+                                    <i class="bi bi-bar-chart-line"></i>
+                                </div>
+
+                                <div>
+                                    <small class="text-muted">TOTAL REGISTROS ESTE MES</small>
+                                    <h4 class="fw-bold mb-0">1,482</h4>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="card p-4 bg-light border-0 rounded-4">
+
+                    <div class="row g-3 align-items-end">
+
+                        <!-- Búsqueda -->
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-search"></i>
+                                </span>
+                                <input type="text" class="form-control" placeholder="ID, Material, or Reciclador...">
+                            </div>
+                        </div>
+
+                        <!-- Select -->
+                        <div class="col-md-2">
+                            <select class="form-select">
+                                <option selected>Agregar material</option>
+                                <option>Plástico</option>
+                                <option>Papel</option>
+                                <option>Vidrio</option>
+                            </select>
+                        </div>
+
+                        <!-- Fechas -->
+                        <div class="col-md-4">
+                            <div class="d-flex gap-2">
+                                <input type="date" class="form-control">
+                                <span class="align-self-center">to</span>
+                                <input type="date" class="form-control">
+                            </div>
+                        </div>
+
+                        <!-- Botones -->
+                        <div class="col-md-2">
+                            <button class="btn btn-light w-100">
+                                Aplicar
+                            </button>
+                        </div>
+
+                        <div class="mt-3 text-end">
+                            <button id="btnExportar" class="btn btn-success px-4 py-2">
+                                <span id="textoExportar">
+                                    <i class="bi bi-file-earmark-spreadsheet"></i> Export to CSV
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabla de registros -->
+                <div class="card border-0 shadow-sm rounded-4 p-3">
+                    <div class="table-responsive">
+                        <table class="table align-middle">
+
+                            <thead class="text-muted">
+                                <tr>
+                                    <th>FECHA Y HORA</th>
+                                    <th>ID TRANSACCIÓN</th>
+                                    <th>MATERIAL</th>
+                                    <th>RECOLECTOR</th>
+                                    <th>PESO</th>
+                                    <th>VALOR ESTIMADO</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="fw-semibold">06 Abr 2026</div>
+                                        <small class="text-muted">06:22 PM</small>
+                                    </td>
+
+                                    <td>
+                                        <span class="badge bg-secondary-subtle text-dark">#TRX-1001</span>
+                                    </td>
+
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <span class="bg-success-subtle p-2 rounded">
+                                                <i class="bi bi-recycle text-success"></i>
+                                            </span>
+                                            <span>PET Plásticos</span>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <img src="img/ana.jpg" class="rounded-circle" width="30" height="30">
+                                            <span>Ana Gómez</span>
+                                        </div>
+                                    </td>
+
+                                    <td>120 kg</td>
+
+                                    <td class="text-success fw-semibold">$85.000</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="fw-semibold">05 Abr 2026</div>
+                                        <small class="text-muted">05:45 PM</small>
+                                    </td>
+
+                                    <td>
+                                        <span class="badge bg-secondary-subtle text-dark">#TRX-1002</span>
+                                    </td>
+
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <span class="bg-success-subtle p-2 rounded">
+                                                <i class="bi bi-box text-warning"></i>
+                                            </span>
+                                            <span>Cartón</span>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <img src="img/carlos.jpg" class="rounded-circle" width="30" height="30">
+                                            <span>Carlos Pérez</span>
+                                        </div>
+                                    </td>
+
+                                    <td>300
+                                        kg</td>
+
+                                    <td class="text-success fw-semibold">$120.000</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="fw-semibold">04 Abr 2026</div>
+                                        <small class="text-muted">03:12 PM</small>
+                                    </td>
+
+                                    <td>
+                                        <span class="badge bg-secondary-subtle text-dark">#TRX-1003</span>
+                                    </td>
+
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <span class="bg-success-subtle p-2 rounded">
+                                                <i class="bi bi-box-seam text-primary"></i>
+                                            </span>
+                                            <span>Aluminio</span>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <img src="img/maria.jpg" class="rounded-circle" width="30" height="30">
+                                            <span>María Rodríguez</span>
+                                        </div>
+                                    </td>
+
+                                    <td>80 kg</td>
+
+                                    <td class="text-success fw-semibold">$150.000</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="fw-semibold">03 Abr 2026</div>
+                                        <small class="text-muted">02:32 PM</small>
+                                    </td>
+
+                                    <td>
+                                        <span class="badge bg-secondary-subtle text-dark">#TRX-1004</span>
+                                    </td>
+
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <span class="bg-success-subtle p-2 rounded">
+                                                <i class="bi bi-recycle text-success"></i>
+                                            </span>
+                                            <span>PET Plásticos</span>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <img src="img/jorge.jpg" class="rounded-circle" width="30" height="30">
+                                            <span>Jorge Martínez</span>
+                                        </div>
+                                    </td>
+
+                                    <td>95 kg</td>
+
+                                    <td class="text-success fw-semibold">$65.000</td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+
+            </main>
+
+            <!-- Modal de agregar material -->
+            <div class="modal fade" id="modalAgregarMaterial" tabindex="-1" aria-labelledby="modalAgregarMaterialLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalAgregarMaterialLabel">Agregar material</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Cerrar"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="nombreMaterial" class="form-label">Nombre del material</label>
+                                <input type="text" class="form-control" id="nombreMaterial"
+                                    placeholder="Ej: PET Plásticos">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="categoriaMaterial" class="form-label">Categoría</label>
+                                <select class="form-select" id="categoriaMaterial">
+                                    <option selected disabled>Selecciona una categoría</option>
+                                    <option>Plásticos</option>
+                                    <option>Papel</option>
+                                    <option>Metal</option>
+                                    <option>Vidrio</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="stockMaterial" class="form-label">Stock inicial</label>
+                                <input type="number" class="form-control" id="stockMaterial" placeholder="Ej: 500">
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-success" data-bs-dismiss="modal">
+                                Guardar
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            <script>
+                const btnExportar = document.getElementById("btnExportar");
+
+                btnExportar.addEventListener("click", function () {
+                    // Contenido falso del CSV
+                    const contenido = `Material,Categoria,Stock,Unidad,Fecha
+            PET Plastics,Plásticos,12450,kg,30 Mar 2026
+            Cartón corrugado,Papel,1200,kg,24 Mar 2026
+            Latas de aluminio,Metal,8900,kg,22 Mar 2026
+            Vidrio verde,Vidrio,5430,kg,20 Mar 2026`;
+
+                    // Crear archivo tipo CSV
+                    const archivo = new Blob([contenido], { type: "text/csv;charset=utf-8;" });
+
+                    // Crear enlace temporal
+                    const enlace = document.createElement("a");
+                    const url = URL.createObjectURL(archivo);
+
+                    enlace.href = url;
+                    enlace.download = "materiales.csv";
+
+                    // Agregar al documento, hacer click y eliminar
+                    document.body.appendChild(enlace);
+                    enlace.click();
+                    document.body.removeChild(enlace);
+
+                    // Liberar memoria
+                    URL.revokeObjectURL(url);
+                });
+            </script>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+            </script>
+
+</body>
+
+</html>
